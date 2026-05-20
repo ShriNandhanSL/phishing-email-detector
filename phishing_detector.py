@@ -39,7 +39,21 @@ while True:
     if msg.lower() == "exit":
         break
 
-    msg_vec = vectorizer.transform([msg])
+    suspicious_words = [
+    "urgent",
+    "verify",
+    "password",
+    "bank",
+    "login",
+    "click",
+    "account"
+]
+
+for word in suspicious_words:
+    if word in msg.lower():
+        print(f"⚠ Suspicious keyword detected: {word}")
+
+msg_vec = vectorizer.transform([msg])
     prediction = model.predict(msg_vec)
 
     if prediction[0] == 1:
